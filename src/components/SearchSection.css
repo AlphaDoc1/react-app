@@ -63,6 +63,7 @@
   transition: background-color 0.3s ease;
   animation: fadeIn 0.3s ease-out;
   animation-fill-mode: both;
+  color: black;
 }
 
 .search-item:hover {
@@ -124,4 +125,18 @@
   border-top: 4px solid #3498db;
   border-radius: 50%;
   animation: spin 1s linear infinite;
+}
+
+.restricted {
+  color: red;
+  font-weight: bold;
+}
+
+.alert-icon {
+  margin-right: 5px;
+  color: red;
+}
+
+.uploaded {
+  color: green;
 } 

@@ -1,5 +1,6 @@
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import ErrorIcon from '@mui/icons-material/Error';
 import { Box, Button, List, ListItem, Paper, Typography } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import { styled } from '@mui/material/styles';
@@ -209,8 +210,8 @@ function UploadSection() {
               p: 2,
               mt: 2,
               textAlign: 'center',
-              bgcolor: uploadResult.includes('failed') ? '#fee2e2' : '#dcfce7',
-              color: uploadResult.includes('failed') ? '#991b1b' : '#166534',
+              bgcolor: uploadResult.includes('Restricted file') ? '#fee2e2' : '#dcfce7',
+              color: uploadResult.includes('Restricted file') ? '#991b1b' : '#166534',
               borderRadius: 2,
               animation: `${fadeIn} 0.5s ease-out`,
               display: 'flex',
@@ -219,13 +220,22 @@ function UploadSection() {
               gap: 1
             }}
           >
-            {uploadComplete && !uploadResult.includes('failed') && (
-              <CheckCircleIcon 
+            {uploadResult.includes('Restricted file') ? (
+              <ErrorIcon 
                 sx={{
-                  color: '#166534',
+                  color: '#991b1b',
                   animation: `${successAnimation} 0.5s ease-out`
                 }}
               />
+            ) : (
+              uploadComplete && !uploadResult.includes('failed') && (
+                <CheckCircleIcon 
+                  sx={{
+                    color: '#166534',
+                    animation: `${successAnimation} 0.5s ease-out`
+                  }}
+                />
+              )
             )}
             {uploadResult}
           </Paper>

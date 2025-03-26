@@ -11,11 +11,48 @@ function SearchSection() {
     try {
       const response = await fetch('/api/notes?search=' + encodeURIComponent(query));
       const data = await response.json();
-      setNotes(data);
+      console.log("Search response data:", data);
+      
+      // Check if data is an array
+      if (Array.isArray(data)) {
+        setNotes(data);
+      } else if (data && Array.isArray(data.notes)) {
+        setNotes(data.notes);
+      } else if (data && Array.isArray(data.result)) {
+        setNotes(data.result);
+      } else {
+        console.error("Unexpected response format:", data);
+        setNotes([]);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error during search:", error);
     } finally {
       setLoading(false);
+    }
+  };
+  
+  const renderNote = (note) => {
+    if (note.includes("Restricted file:")) {
+      return (
+        <li key={note} className="search-item restricted">
+          <span className="file-name">
+            <i className="alert-icon"></i> {note}
+          </span>
+        </li>
+      );
+    } else {
+      return (
+        <li key={note} className="search-item">
+          <span className="file-name">{note}</span>
+          <a
+            className="download-link"
+            href={`http://localhost:8080/api/notes/download/${encodeURIComponent(note)}`}
+            download={note}
+          >
+            Download
+          </a>
+        </li>
+      );
     }
   };
 
@@ -41,18 +78,7 @@ function SearchSection() {
         </div>
       ) : (
         <ul className="search-results">
-          {notes.map((note, index) => (
-            <li key={index} className="search-item">
-              <span className="file-name">{note}</span>
-              <a
-                className="download-link"
-                href={`http://localhost:8080/api/notes/download/${encodeURIComponent(note)}`}
-                download={note}
-              >
-                Download
-              </a>
-            </li>
-          ))}
+          {notes.map((note) => renderNote(note))}
         </ul>
       )}
     </section>
