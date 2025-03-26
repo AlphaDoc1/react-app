@@ -10,7 +10,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.7",
     "@mui/material": "^6.4.7",
-    "axios": "^1.8.3",
+    "axios": "^1.8.2",
     "framer-motion": "^12.4.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -18,13 +18,13 @@
     "react-scripts": "^5.0.1",
     "react-speech-recognition": "^4.0.0"
   },
-   "scripts": {
-  "postinstall": "chmod -R 755 ./node_modules/.bin",
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
-},
+  "scripts": {
+    "postinstall": "chmod -R 755 ./node_modules/.bin",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
